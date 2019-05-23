@@ -17,7 +17,7 @@ public String sameEnds(String string) {
     String head = string.substring(0,i);
     String tail = string.substring(len-i, len);
     if (head.equals(tail) && head.length()+tail.length()<=len) {
-      ret=string.substring(0,i);
+      ret=head;
     }
   }
   return ret;
