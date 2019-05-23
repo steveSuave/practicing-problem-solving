@@ -14,8 +14,8 @@ public String sameEnds(String string) {
   int len = string.length();
   String ret="";
   for (int i=1; i<len; i++){
-    String head = string.substring(0,i);
-    String tail = string.substring(len-i, len);
+    final String head = string.substring(0,i);
+    final String tail = string.substring(len-i, len);
     if (head.equals(tail) && head.length()+tail.length()<=len) {
       ret=head;
     }
