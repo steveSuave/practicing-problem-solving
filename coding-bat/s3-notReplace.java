@@ -28,8 +28,8 @@ public String notReplace(String str) {
   if (!Character.isLetter(ret.charAt(len-3)) &&
       ret.charAt(len-3)!=' ' &&
       ret.substring(len-2).equals("is")){
-        ret=ret+" not";
-      }
+  	ret=ret+" not";
+  }
 	  
   return ret;
 }
