@@ -1,4 +1,3 @@
-# ProjectEuler-CodingBat-etc
 Solutions to various problems
 
-from project euler, coding bat, codewars and elsewhere. 
+from coding bat, codewars, leetcode, project euler and elsewhere. 
