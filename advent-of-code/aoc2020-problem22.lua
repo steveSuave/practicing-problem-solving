@@ -20,6 +20,7 @@ function main()
 end
 
 function play(hand1, hand2)
+   -- if list is empty
    if (#hand1 < 1) then
       return calc(hand2)
    elseif (#hand2 < 1) then
@@ -42,21 +43,25 @@ end
 
 -- The description does not specify what to do in case of a tie
 -- I assume that the numbers will always be different.
--- Could use a more efficient queue implementation for larger inputs.
 function updateHands(hand1, hand2)
    if (hand1[1] > hand2[1]) then
-      table.insert(hand1, hand1[1])
-      table.insert(hand1, hand2[1])
-      table.remove(hand1, 1)
-      table.remove(hand2,1)
+      cycleCards(hand1, hand2)
    else
-      table.insert(hand2, hand2[1])
-      table.insert(hand2, hand1[1])
-      table.remove(hand2, 1)
-      table.remove(hand1,1)
+      cycleCards(hand2, hand1)
    end
    return hand1, hand2
 end
 
+-- Could use a more efficient queue implementation for larger inputs.
+function cycleCards(hand1, hand2)
+      table.insert(hand1, hand1[1])
+      table.insert(hand1, hand2[1])
+      table.remove(hand1, 1)
+      table.remove(hand2, 1)
+end   
+
+-- thanks to lua for its tail recursion,
+-- its multiple return values and its eccentric
+-- indexing system which comes handy in this problem 
 main()
 
