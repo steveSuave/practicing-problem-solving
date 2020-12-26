@@ -13,7 +13,7 @@
 -- This problem was solved using the example data given in the description.
 
 function main()
-   player1 = {9, 2, 6, 3, 1}
+   player1 = {9, 2, 6, 3,  1}
    player2 = {5, 8, 4, 7, 10}
    print(play(player1, player2)) -- 306
 end
@@ -53,10 +53,10 @@ end
 
 -- Could use a more efficient queue implementation for larger inputs.
 function cycleCards(hand1, hand2)
-      table.insert(hand1, hand1[1])
-      table.insert(hand1, hand2[1])
-      table.remove(hand1, 1)
-      table.remove(hand2, 1)
+   table.insert(hand1, hand1[1])
+   table.insert(hand1, hand2[1])
+   table.remove(hand1, 1)
+   table.remove(hand2, 1)
 end   
 
 -- thanks to lua for its tail recursion and its multiple return values.
