@@ -6,7 +6,7 @@ class Solution:
         ret = []
         if len(nums) == 0:
             return [ret]
-        for i in Solution.subsets(self, nums[1:]):
+        for i in self.subsets(nums[1:]):
             ret.append(i)
             ret.append([nums[0]]+i)
         return ret

@@ -8,6 +8,6 @@ class Solution:
             return [ret]
         for element in nums:
             for permutation in \
-              Solution.permute(self, list(filter(lambda e: e!=element, nums))):
+              self.permute(list(filter(lambda e: e!=element, nums))):
                 ret.append([element]+permutation)
         return ret
