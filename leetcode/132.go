@@ -22,8 +22,8 @@
 // Constraints:
 
 //     n == nums.length
-//     1 <= n <= 104
-//     -109 <= nums[i] <= 109
+//     1 <= n <= 10^4
+//     -10^9 <= nums[i] <= 10^9
 
 func find132pattern(nums []int) bool {
 	
@@ -33,7 +33,7 @@ func find132pattern(nums []int) bool {
 	
 	// bigs is a stack which will always contain at index 0 the largest element
 	// already seen in the list, starting with the lists last element and
-	// augmenting with monotonically decreasing numbers
+	// augmenting with decreasing numbers
 	bigs := make([]int,0)
 	
 	for i := len(nums)-1; i > -1; i-- {
@@ -49,7 +49,7 @@ func find132pattern(nums []int) bool {
 			// bigs[0] might or might not get updated with the new max
 			possible_mid, bigs = bigs[len(bigs)-1], bigs[:len(bigs)-1]
 		}
-		// the stack will always be monotonically decreasing
+		// the stack will always be in decreasing order
 		// and possible_mid will always be smaller than bigs[0]
 		bigs = append(bigs, nums[i])
 	}
