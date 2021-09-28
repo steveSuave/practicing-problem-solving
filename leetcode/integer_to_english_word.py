@@ -17,7 +17,7 @@
 #     Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
 
 # Constraints:
-#     0 <= num <= 231 - 1
+#     0 <= num <= (2**31) - 1
 
 
 # =============================================================================================================================
