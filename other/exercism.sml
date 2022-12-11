@@ -47,3 +47,17 @@ fun isPangram s =
     in
         panHelper (map Char.toLower (explode s)) (explode "abcdefghijklmnopqrstuvwxyz")
     end;
+
+(* ================================================================ *)
+
+fun collatz n =
+    let fun help count num =
+            if num <= 0 then NONE
+            else if num = 1 then SOME(count)
+            else if num mod 2 = 0 then
+                help (count+1) (num div 2)
+            else
+                help (count+1) (3*num+1)
+    in
+        help 0 n
+    end;
