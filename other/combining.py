@@ -1,7 +1,7 @@
-# Για να βρω το δυναμοσύνολο μιας λίστας:
-# Αν η λίστα είναι κενή τότε το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
-# Αλλιώς βρίσκω το δυναμοσύνολο της λίστας χωρίς την κεφαλή και κρατώ κάθε στοιχείο του δύο φορές.
-# Την μία απαράλλαχτο και την άλλη έχοντας προσαρτήσει σε αυτό την κεφαλή.
+# To find the powerset of a list:
+# If the list is empty then the result is the set with the empty list.
+# Otherwise find the powerset of the list without the head and keep each element twice.
+# Once unchanged and once having appended the head to it.
 #
 # list -> listof list
 def powerset(xs):
@@ -20,13 +20,13 @@ powerset([1,2,3])
 # [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
 
 
-# Για να βρω τις μεταθέσεις μιας λίστας ανά κ στοιχεία:
-# Αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
-# Αλλιώς βγάζω ένα στοιχείο απο την λίστα,
-# βρίσκω τις μεταθέσεις των εναπομεινόντων στοιχείων ανα κ-1
-# και προσαρτώ σε κάθε μετάθεση του αποτελέσματος το εξαιρεθέν στοιχείο.
-# Βάζω το εξαιρεθέν στοιχείο πίσω στην αρχική λίστα, βγάζω το επόμενο και
-# επαναλαμβάνω τα βήματα μέχρι να εξαντληθεί η αρχική λίστα.
+# To find the permutations of a list by k elements:
+# If k is 0 the result is the set with the empty list.
+# Otherwise remove one element from the list,
+# find the permutations of the remaining elements by k-1
+# and append to each permutation of this result the excluded element.
+# Then put the excluded element back to the original list, remove the next one and
+# repeat the steps until the original list is exhausted.
 #
 # list, int -> listof list[int]
 def permute(xs, k):
@@ -47,11 +47,11 @@ permute([1,2,3], 2)
 # [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
 
 
-# Για να βρω τις μεταθέσεις μιας λίστας ανά κ στοιχεία, με επανατοποθέτηση:
-# Αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
-# Αλλιώς για κάθε στοιχείο, βρίσκω τις μεταθέσεις με επανατοποθέτηση ανα κ-1
-# ολόκληρης της αρχικής λίστας και προσαρτώ σε κάθε μετάθεση του αποτελέσματος
-# αυτό το στοιχείο.
+# To find the permutations of a list by k elements, with replacement:
+# If k is 0 the result is the set with the empty list.
+# Otherwise for each element, find the permutations with replacement by k-1
+# of the entire original list and append to each permutation of the result
+# this element.
 #
 # list, int -> listof list[int]
 def permute_repeat(xs, k):
@@ -70,12 +70,12 @@ permute_repeat([1,2,3], 2)
 # [[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]]
 
 
-# Για να βρω τους συνδυασμούς μιας λίστας ανα κ στοιχεία:
-# Πρώτον: αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα,
-# Δεύτερον: αν η λίστα είναι άδεια το αποτέλεσμα είναι η κενή λίστα.
-# αλλιώς το αποτέλεσμα είναι οι συνδυασμοί της ουράς της λίστας ανα κ στοιχεία
-# μαζί με τους συνδυασμούς *της ουράς* ανα κ-1 στοιχεία, όπου σε κάθε στοιχείο
-# έχει προσαρτηθεί και η κεφαλή.
+# To find the combinations of a list by k elements:
+# Firstly: if k is 0 the result is the set with the empty list,
+# Secondly: if the list is empty the result is the empty list.
+# otherwise the result is the combinations of the tail of the list by k elements
+# together with the combinations of the *tail* by k-1 elements, where to each element
+# the head has been appended.
 #
 # list, int -> listof list[int]
 def combine(xs, k):
@@ -97,12 +97,12 @@ combine([1,2,3], 2)
 # [[2, 3], [1, 3], [1, 2]]
 
 
-# Για να βρω τους συνδυασμούς μιας λίστας ανα κ στοιχεία με επανατοποθέτηση:
-# Πρώτον: αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα,
-# Δεύτερον: αν η λίστα είναι άδεια το αποτέλεσμα είναι η κενή λίστα.
-# αλλιώς το αποτέλεσμα είναι οι συνδυασμοί της ουράς της λίστας ανα κ στοιχεία
-# μαζί με τους συνδυασμούς *ολόκληρης της λίστας* ανα κ-1 στοιχεία, όπου σε κάθε στοιχείο
-# έχει προσαρτηθεί και η κεφαλή.
+# To find the combinations of a list by k elements with replacement:
+# Firstly: if k is 0 the result is the set with the empty list,
+# Secondly: if the list is empty the result is the empty list.
+# otherwise the result is the combinations with replacement of the tail of the list by k elements
+# together with the combinations with replacement of the *entire list* by k-1 elements,
+# where to each element the head has been appended.
 #
 # list, int -> listof list[int]
 def combine_repeat(xs, k):
