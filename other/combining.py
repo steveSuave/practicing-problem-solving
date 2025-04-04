@@ -1,75 +1,124 @@
+# Για να βρω το δυναμοσύνολο μιας λίστας:
+# Αν η λίστα είναι κενή τότε το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
+# Αλλιώς βρίσκω το δυναμοσύνολο της λίστας χωρίς την κεφαλή και κρατώ κάθε στοιχείο του δύο φορές.
+# Την μία απαράλλαχτο και την άλλη έχοντας προσαρτήσει σε αυτό την κεφαλή.
+#
 # list -> listof list
-# 2 ** len(ls)
-def powerset(ls):
-    if len(ls) == 0:
+def powerset(xs):
+    """
+    2^n
+    """
+    if len(xs) == 0:
         return [[]]
     ret = []
-    for subset in powerset(ls[1:]):
+    for subset in powerset(xs[1:]):
         ret.append(subset)
-        ret.append([ls[0]] + subset)
+        ret.append([xs[0]] + subset)
     return ret
 
 powerset([1,2,3])
-[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+# [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
 
 
+# Για να βρω τις μεταθέσεις μιας λίστας ανά κ στοιχεία:
+# Αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
+# Αλλιώς βγάζω ένα στοιχείο απο την λίστα,
+# βρίσκω τις μεταθέσεις των εναπομεινόντων στοιχείων ανα κ-1
+# και προσαρτώ σε κάθε μετάθεση του αποτελέσματος το εξαιρεθέν στοιχείο.
+# Βάζω το εξαιρεθέν στοιχείο πίσω στην αρχική λίστα, βγάζω το επόμενο και
+# επαναλαμβάνω τα βήματα μέχρι να εξαντληθεί η αρχική λίστα.
+#
 # list, int -> listof list[int]
-# len(ls)! / (len(ls) − n)!
-def permute(ls, n):
-    if n == 0:
+def permute(xs, k):
+    """
+       n!
+    --------
+     (n−k)!
+    """
+    if k == 0:
         return [[]]
     ret = []
-    for i in range(len(ls)):
-        for permutation in permute(ls[:i] + ls[i+1:], n-1):    #*
-            ret.append([ls[i]] + permutation)
+    for i in range(len(xs)):
+        for permutation in permute(xs[:i] + xs[i+1:], k-1):    #*
+            ret.append([xs[i]] + permutation)
     return ret
 
 permute([1,2,3], 2)
-[[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
+# [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
 
 
+# Για να βρω τις μεταθέσεις μιας λίστας ανά κ στοιχεία, με επανατοποθέτηση:
+# Αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα.
+# Αλλιώς για κάθε στοιχείο, βρίσκω τις μεταθέσεις με επανατοποθέτηση ανα κ-1
+# ολόκληρης της αρχικής λίστας και προσαρτώ σε κάθε μετάθεση του αποτελέσματος
+# αυτό το στοιχείο.
+#
 # list, int -> listof list[int]
-# len(ls) ** n
-def permute_repeat(ls, n):
-    if n == 0:
+def permute_repeat(xs, k):
+    """
+    n^k
+    """
+    if k == 0:
         return [[]]
     ret = []
-    for i in range(len(ls)):
-        for permutation in permute_repeat(ls, n-1):            #*
-            ret.append([ls[i]] + permutation)
+    for i in range(len(xs)):
+        for permutation in permute_repeat(xs, k-1):            #*
+            ret.append([xs[i]] + permutation)
     return ret
 
 permute_repeat([1,2,3], 2)
-[[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]]
+# [[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]]
 
 
+# Για να βρω τους συνδυασμούς μιας λίστας ανα κ στοιχεία:
+# Πρώτον: αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα,
+# Δεύτερον: αν η λίστα είναι άδεια το αποτέλεσμα είναι η κενή λίστα.
+# αλλιώς το αποτέλεσμα είναι οι συνδυασμοί της ουράς της λίστας ανα κ στοιχεία
+# μαζί με τους συνδυασμούς *της ουράς* ανα κ-1 στοιχεία, όπου σε κάθε στοιχείο
+# έχει προσαρτηθεί και η κεφαλή.
+#
 # list, int -> listof list[int]
-# len(ls)! / n! * (len(ls) − n)!
-def combine(ls, n):
-    if n == 0:
+def combine(xs, k):
+    """
+        n!
+    ----------
+     k!(n−k)!
+    """
+    if k == 0:
         return [[]]
-    if ls == []:
+    if xs == []:
         return []
-    ret = combine(ls[1:], n)
-    for combination in combine(ls[1:], n-1):      #*
-        ret.append(ls[:1] + combination)
+    ret = combine(xs[1:], k)
+    for combination in combine(xs[1:], k-1):      #*
+        ret.append(xs[:1] + combination)
     return ret
 
 combine([1,2,3], 2)
-[[2, 3], [1, 3], [1, 2]]
+# [[2, 3], [1, 3], [1, 2]]
 
 
+# Για να βρω τους συνδυασμούς μιας λίστας ανα κ στοιχεία με επανατοποθέτηση:
+# Πρώτον: αν το κ είναι 0 το αποτέλεσμα είναι το σύνολο με την κενή λίστα,
+# Δεύτερον: αν η λίστα είναι άδεια το αποτέλεσμα είναι η κενή λίστα.
+# αλλιώς το αποτέλεσμα είναι οι συνδυασμοί της ουράς της λίστας ανα κ στοιχεία
+# μαζί με τους συνδυασμούς *ολόκληρης της λίστας* ανα κ-1 στοιχεία, όπου σε κάθε στοιχείο
+# έχει προσαρτηθεί και η κεφαλή.
+#
 # list, int -> listof list[int]
-# (len(ls) + n - 1)! / n! * (len(ls) − 1)!
-def combine_repeat(ls, n):
-    if n == 0:
+def combine_repeat(xs, k):
+    """
+     (n+k-1)!
+    ----------
+     k!(n−1)!
+    """
+    if k == 0:
         return [[]]
-    if ls == []:
+    if xs == []:
         return []
-    ret = combine_repeat(ls[1:], n)
-    for combination in combine_repeat(ls, n-1):   #*
-        ret.append(ls[:1] + combination)
+    ret = combine_repeat(xs[1:], k)
+    for combination in combine_repeat(xs, k-1):   #*
+        ret.append(xs[:1] + combination)
     return ret
 
 combine_repeat([1,2,3], 2)
-[[3, 3], [2, 3], [2, 2], [1, 3], [1, 2], [1, 1]]
+# [[3, 3], [2, 3], [2, 2], [1, 3], [1, 2], [1, 1]]
